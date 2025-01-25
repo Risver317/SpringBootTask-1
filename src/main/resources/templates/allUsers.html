@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>All Users</title>
+</head>
+<body>
+<h2>Users List</h2>
+
+<table border="1" width="1000">
+  <thead>
+  <tr>
+    <th>Id</th>
+    <th>Name</th>
+    <th>Last Name</th>
+    <th>Email</th>
+    <th>Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="user : ${users}">
+    <td th:text="${user.id}"></td>
+    <td th:text="${user.name}"></td>
+    <td th:text="${user.last_name}"></td>
+    <td th:text="${user.email}"></td>
+    <td>
+      <a th:href="@{/users/edit/{id}(id=${user.id})}">Edit</a> |
+      <a th:href="@{/users/delete/{id}(id=${user.id})}" onclick="return confirm('Are you sure?')">Delete</a>
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+<a th:href="@{/users/add}" class="buttonAdd">Add User</a>
+
+<br>
+
+<form action="#" th:action="@{/users/find}" method="get">
+  <label for="findId">Enter ID to find:</label>
+  <input type="text" id="findId" name="id" title="Please enter a valid number." required/>
+  <input type="submit" class="button" value="Find User"/>
+</form>
+
+</body>
+</html>
